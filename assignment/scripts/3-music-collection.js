@@ -28,6 +28,17 @@ function showCollection(collection) {
 }
 showCollection(myCollection);
 
+function findByArtist(collection, artist) {
+  let matchingResult = [];
+  for (let object of collection) {
+    if (object.artist == artist) {
+      matchingResult.push(object);
+    }
+  }
+  return matchingResult;
+}
+console.log(findByArtist(myCollection, 'BBHF'));
+
 
 // PLEASE DO NOT MODIFY THIS. Just leave it down here at the bottom. Think of it
 // as a lil' chunk of friendly code that you don't need to understand right now.
