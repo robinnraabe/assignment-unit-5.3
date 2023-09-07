@@ -1,6 +1,5 @@
 console.log('***** Music Collection *****')
 // Safe Zone -- Write code below this line
-// There is no primesCollection?
 let myCollection = [];
 
 function addToCollection (collection, title, artist, yearPublished) {
@@ -13,13 +12,15 @@ function addToCollection (collection, title, artist, yearPublished) {
   return albumToAdd;
 }
 
-console.log('Added:', addToCollection(myCollection, 'Galore', 'Oklou', 2020));
-console.log('Added:', addToCollection(myCollection, 'Sea and the Darkness', 'Galileo Galilei', 2016));
-console.log('Added:', addToCollection(myCollection, 'BBHF1 - Young Man Goes South', 'BBHF', 2020));
-console.log('Added:', addToCollection(myCollection, 'Bee And The Whales', 'Galileo Galilei', 2023));
-console.log('Added:', addToCollection(myCollection, 'food house', 'food house', 2020));
-console.log('Added:', addToCollection(myCollection, 'UFOF', 'Big Thief', 2019));
-console.log(myCollection);
+console.log('Added:', addToCollection(myCollection, 'Galore', 'Oklou', 2020),
+addToCollection(myCollection, 'Sea and the Darkness', 'Galileo Galilei', 2016),
+addToCollection(myCollection, 'BBHF1 - Young Man Goes South', 'BBHF', 2020),
+addToCollection(myCollection, 'Family', 'BBHF', 2019),
+addToCollection(myCollection, 'Mirror Mirror', 'BBHF', 2019),
+addToCollection(myCollection, 'Bee And The Whales', 'Galileo Galilei', 2023),
+addToCollection(myCollection, 'food house', 'food house', 2020),
+addToCollection(myCollection, 'UFOF', 'Big Thief', 2019));
+console.log('The full collection:', myCollection);
 
 function showCollection(collection) {
   for (let object of collection) {
@@ -38,6 +39,35 @@ function findByArtist(collection, artist) {
   return matchingResult;
 }
 console.log(findByArtist(myCollection, 'BBHF'));
+
+function search(collection, searchCriteria) {
+  let matchingResult = [];
+  if (searchCriteria == undefined 
+    || searchCriteria == {} 
+    || searchCriteria.artist == undefined 
+    || searchCriteria.artist == ''
+    || (searchCriteria.year == undefined 
+    && searchCriteria.yearPublished == undefined)) { 
+      return collection;
+  }
+  else {
+    for (let object of collection) {
+      if (object.artist == searchCriteria.artist 
+        && (object.yearPublished == searchCriteria.year
+        || object.yearPublished == searchCriteria.yearPublished)) {
+        matchingResult.push(object);
+      }
+    }
+    return matchingResult;
+  }
+}
+
+console.log('Should find two BBHF albums published in 2019', search(myCollection, {artist: 'BBHF', year: 2019}));
+console.log('Should find one food house album published in 2020', search(myCollection, {artist: 'food house', yearPublished: 2020}));
+console.log('Should not find artist or year and return the entire collection', search(myCollection, {}));
+console.log('Should not find a match and return an empty array', search(myCollection, {artist: 'Galileo Galilei', year: 2020}));
+console.log('Should not find artist or year and return the entire collection', search(myCollection, 'no object'));
+console.log('Should not find artist or year and return the entire collection', search(myCollection));
 
 
 // PLEASE DO NOT MODIFY THIS. Just leave it down here at the bottom. Think of it
