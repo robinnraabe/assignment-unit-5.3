@@ -2,6 +2,7 @@ console.log('***** Music Collection *****')
 // Safe Zone -- Write code below this line
 let myCollection = [];
 
+// Adds an album object to a collection array
 function addToCollection (collection, title, artist, yearPublished) {
   let albumToAdd = {
     title,
@@ -11,7 +12,6 @@ function addToCollection (collection, title, artist, yearPublished) {
   collection.push(albumToAdd);
   return albumToAdd;
 }
-
 console.log('Added:', addToCollection(myCollection, 'Galore', 'Oklou', 2020),
 addToCollection(myCollection, 'Sea and the Darkness', 'Galileo Galilei', 2016),
 addToCollection(myCollection, 'BBHF1 - Young Man Goes South', 'BBHF', 2020),
@@ -22,6 +22,7 @@ addToCollection(myCollection, 'food house', 'food house', 2020),
 addToCollection(myCollection, 'UFOF', 'Big Thief', 2019));
 console.log('The full collection:', myCollection);
 
+// Console logs every album object in a collection array as a string
 function showCollection(collection) {
   for (let object of collection) {
     console.log(`${object.title} by ${object.artist}, published in ${object.yearPublished}`);
@@ -29,17 +30,21 @@ function showCollection(collection) {
 }
 showCollection(myCollection);
 
+// Searches a collection array for all album objects with the specified artist
 function findByArtist(collection, artist) {
-  let matchingResult = [];
+  let matchingResults = [];
   for (let object of collection) {
     if (object.artist == artist) {
-      matchingResult.push(object);
+      matchingResults.push(object);
     }
   }
-  return matchingResult;
+  return matchingResults;
 }
-console.log(findByArtist(myCollection, 'BBHF'));
+console.log('Albums by BBHF:', findByArtist(myCollection, 'BBHF'));
+console.log('Albums by Madeon:', findByArtist(myCollection, 'Madeon'));
 
+// Searches a collection array for all album objects with BOTH 
+// the specified artist AND the specified year
 function search(collection, searchCriteria) {
   let matchingResult = [];
   if (searchCriteria == undefined 
@@ -61,7 +66,6 @@ function search(collection, searchCriteria) {
     return matchingResult;
   }
 }
-
 console.log('Should find two BBHF albums published in 2019', search(myCollection, {artist: 'BBHF', year: 2019}));
 console.log('Should find one food house album published in 2020', search(myCollection, {artist: 'food house', yearPublished: 2020}));
 console.log('Should not find artist or year and return the entire collection', search(myCollection, {}));
